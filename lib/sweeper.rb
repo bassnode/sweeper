@@ -212,14 +212,17 @@ class Sweeper
 
       tags = {}
       SONG_KEYS.each do |id3_name, last_fm_name|
-        tags[id3_name] = song.send(last_fm_name) if song.respond_to? last_fm_name
+        val = song.respond_to?(last_fm_name) ? song.send(last_fm_name) : nil
+        tags[id3_name] = val if val.is_a?(String)
       end
+
       ARTIST_KEYS.each do |id3_name, last_fm_name|
-        tags[id3_name] = song.artist.send(last_fm_name) if song.artist.respond_to? last_fm_name
+        val = song.artist.respond_to?(last_fm_name) ? song.artist.send(last_fm_name) : nil
+        tags[id3_name] = val if val.is_a?(String)
       end
 
       # Relay the largest covert art image.
-      if song.image.is_a?(Array)
+      if song.respond_to?(:image) && song.image.is_a?(Array)
         tags['artwork'] = song.image.last
       end
 
