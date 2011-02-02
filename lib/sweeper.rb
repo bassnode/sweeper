@@ -60,6 +60,8 @@ end
 
 class Sweeper
 
+  VERSION = '0.3.3'
+
   class Problem < RuntimeError; end
 
   # Key is ID3 tag name and value is what Last.FM calls it.
