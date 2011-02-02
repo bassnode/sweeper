@@ -11,59 +11,62 @@ class SweeperTest < Test::Unit::TestCase
     @found_many = "#{@dir}/1_001.mp3"
     @found_one = "#{@dir}/1_010.mp3"
     @not_found = "#{@dir}/1_003.mp3"
+    @found = "#{@dir}/05 - you did it!.mp3"
     @s = Sweeper.new('dir' => @dir, 'genre' => true)
   end
-  
+
   def test_lookup_basic
     assert_equal(
-      {"artist"=>"Photon Band", 
-        "title"=>"To Sing For You", 
-        "url"=>"http://www.last.fm/music/Photon+Band/_/To+Sing+For+You"},
+      {"artwork"=>"http://userserve-ak.last.fm/serve/300x300/32920981.jpg",
+       "title"=>"To Sing for You",
+       "url"=>"http://www.last.fm/music/Photon+Band/_/To+Sing+for+You",
+       "mbid"=>"f6381cea-7de8-4d9b-8aa3-3c769aaaeedd"},
       @s.lookup_basic(@found_many))
     assert_equal(
-      {"artist"=>"Various Artists - Vagabond Productions",
-        "title"=>"Sugar Man - Tom Heyman",
-        "url"=> "http://www.last.fm/music/Various+Artists+-+Vagabond+Productions/_/Sugar+Man+-+Tom+Heyman"},
+      {"artwork"=>"http://userserve-ak.last.fm/serve/300x300/9994857.jpg",
+       "title"=>"Sugar Man",
+       "url"=>"http://www.last.fm/music/Tom+Heyman/_/Sugar+Man",
+       "mbid"=>"1fd18925-990f-4f0c-bffd-8fccc1e778e8"},
       @s.lookup_basic(@found_one))
     assert_raises(Sweeper::Problem) do
       @s.lookup_basic(@not_found)
     end
   end
-  
+
   def test_lookup_genre
     assert_equal(
-       {"genre"=>"Psychadelic", "comment"=>"rock, psychedelic, mod, Philly"},
-      @s.lookup_genre(@s.lookup_basic(@found_many))    
+       {"genre"=>"Indie", "comment"=>"Easy CD-DA Extractor"},
+      @s.lookup_genre(@s.lookup_basic(@found))
     )
     assert_equal(
       Sweeper::DEFAULT_GENRE,
       @s.lookup_genre({})
     )
   end
-  
+
   def test_genre_weighting
-    match, weight = @s.nearest_genre('psychedelic')    
+    match, weight = @s.nearest_genre('psychedelic')
     assert_equal match, 'Psychadelic'
     assert(weight < 1)
     assert(weight > 0)
   end
-  
+
   def test_read
-    assert_equal({}, 
+    assert_equal({},
       @s.read(@found_many))
     assert_equal({},
-      @s.read(@not_found))    
+      @s.read(@not_found))
   end
-  
+
   def test_write
     @s.write(@found_many, @s.lookup(@found_many))
     assert_equal(
-      @s.lookup(@found_many),
+      @s.lookup(@found_many).except('artwork'),
       @s.read(@found_many))
   end
-  
+
   def test_run
     @s.run
   end
-  
+
 end
