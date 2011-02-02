@@ -64,8 +64,8 @@ class Sweeper
 
   # Key is ID3 tag name and value is what Last.FM calls it.
   SONG_KEYS = {'title' => 'name', 'url' => 'url'}
-  ARTIST_KEYS = ['artist', 'mbid']
-  BASIC_KEYS = SONG_KEYS.keys + ARTIST_KEYS #['artist', 'title', 'url']
+  ARTIST_KEYS = {'artist' => 'name', 'mbid' => 'mbid'}
+  BASIC_KEYS = SONG_KEYS.keys + ARTIST_KEYS.keys #['artist', 'title', 'url']
   GENRE_KEYS = ['genre', 'comment']
   ALBUM_KEYS = ['album', 'track']
   GENRES = ID3Lib::Info::Genres
@@ -214,8 +214,8 @@ class Sweeper
       SONG_KEYS.each do |id3_name, last_fm_name|
         tags[id3_name] = song.send(last_fm_name) if song.respond_to? last_fm_name
       end
-      ARTIST_KEYS.each do |key|
-        tags[key] = song.artist.send(key) if song.artist.respond_to? key
+      ARTIST_KEYS.each do |id3_name, last_fm_name|
+        tags[id3_name] = song.artist.send(last_fm_name) if song.artist.respond_to? last_fm_name
       end
 
       # Relay the largest covert art image.

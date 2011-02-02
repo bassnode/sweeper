@@ -18,12 +18,14 @@ class SweeperTest < Test::Unit::TestCase
   def test_lookup_basic
     assert_equal(
       {"artwork"=>"http://userserve-ak.last.fm/serve/300x300/32920981.jpg",
+       "artist"=>"Photon Band",
        "title"=>"To Sing for You",
        "url"=>"http://www.last.fm/music/Photon+Band/_/To+Sing+for+You",
        "mbid"=>"f6381cea-7de8-4d9b-8aa3-3c769aaaeedd"},
       @s.lookup_basic(@found_many))
     assert_equal(
       {"artwork"=>"http://userserve-ak.last.fm/serve/300x300/9994857.jpg",
+       "artist"=>"Tom Heyman",
        "title"=>"Sugar Man",
        "url"=>"http://www.last.fm/music/Tom+Heyman/_/Sugar+Man",
        "mbid"=>"1fd18925-990f-4f0c-bffd-8fccc1e778e8"},
@@ -35,7 +37,9 @@ class SweeperTest < Test::Unit::TestCase
 
   def test_lookup_genre
     assert_equal(
-       {"genre"=>"Indie", "comment"=>"Easy CD-DA Extractor"},
+      {"comment"=>
+        "indie, indie rock, female vocalists, canadian, post-punk, dance-punk, dance punk, electronic, punk, rock",
+       "genre"=>"Indie"},
       @s.lookup_genre(@s.lookup_basic(@found))
     )
     assert_equal(
