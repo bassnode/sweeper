@@ -4,7 +4,7 @@ require 'rubygems'
 require 'choice'
 require "#{File.dirname(__FILE__)}/../lib/sweeper" unless defined? Sweeper
 
-PROGRAM_VERSION = 0.1
+PROGRAM_VERSION = 0.3.3
 
 Choice.options do
   option :dir do
