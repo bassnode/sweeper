@@ -1,9 +1,8 @@
 CHANGELOG
 LICENSE
 Manifest
-README
+README.markdown
 Rakefile
-TODO
 bin/sweeper
 ext/Makefile
 ext/extconf.rb
