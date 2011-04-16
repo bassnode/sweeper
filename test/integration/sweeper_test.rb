@@ -5,14 +5,15 @@ begin; require 'ruby-debug'; rescue LoadError; end
 
 class SweeperTest < Test::Unit::TestCase
   def setup
-    @orig_dir = "#{File.dirname(__FILE__)}/songs"
-    system("rm -rf /tmp/songs; cp -r #{@orig_dir} /tmp")
-    @dir = "/tmp/songs"
-    @found_many = "#{@dir}/1_001.mp3"
-    @found_one = "#{@dir}/1_010.mp3"
-    @not_found = "#{@dir}/1_003.mp3"
-    @found = "#{@dir}/05 - you did it!.mp3"
-    @s = Sweeper.new('dir' => @dir, 'genre' => true)
+    orig_dir = File.join(File.expand_path(File.dirname(__FILE__)), "songs")
+    tmp_dir  = File.join(File.expand_path(File.dirname(__FILE__)), 'tmp')
+    system("rm -rf #{tmp_dir}; cp -r #{orig_dir} #{tmp_dir}")
+
+    @found_many   = File.join(tmp_dir, "1_001.mp3")
+    @found_one    = File.join(tmp_dir, "1_010.mp3")
+    @not_found    = File.join(tmp_dir, "1_003.mp3")
+    @found        = File.join(tmp_dir, "05 - you did it!.mp3")
+    @s = Sweeper.new('dir' => tmp_dir, 'genre' => true)
   end
 
   def test_lookup_basic

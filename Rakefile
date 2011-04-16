@@ -7,7 +7,7 @@ Echoe.new("sweeper") do |p|
   p.url = "http://blog.evanweaver.com/files/doc/fauna/sweeper/"
   p.docs_host = "blog.evanweaver.com:~/www/bax/public/files/doc/"
   p.dependencies = ['id3lib-ruby', 'choice', 'Text', 'activesupport']
-  p.clean_pattern = ['doc', 'pkg', 'test/integration/songs']
+  p.clean_pattern = ['doc', 'pkg']
   p.rdoc_pattern = ['README', 'LICENSE', 'CHANGELOG', 'TODO', 'lib/*']
   p.need_zip = true
   p.need_tar_gz = false
@@ -19,4 +19,4 @@ task :binary do
     File.rename("init.exe", "sweeper.exe")
   end
 end
-  
+
