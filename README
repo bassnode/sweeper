@@ -1,80 +1,78 @@
-
 Sweeper
+=======
 
 Automatically tag your music collection with metadata from Last.fm.
 
-== License
-
-Copyright 2008 Cloudburst, LLC. Licensed under the AFL 3. See the included LICENSE file. Unlinked portions copyright 2008 Last.fm Ltd., used by permission, and licensed under the GPL 2.
-
-The public certificate for the gem is here[http://rubyforge.org/frs/download.php/25331/evan_weaver-original-public_cert.pem].
-
-If you use this software, please {make a donation}[http://blog.evanweaver.com/donate/], or {recommend Evan}[http://www.workingwithrails.com/person/7739-evan-weaver] at Working with Rails.
-
-== Features
+Features
+---------
 
 * faster than MusicBrainz
 * better results than MusicBrainz
 * smart genre tagging
 
-<b>WARNING: This is beta software. Backup your music collection first.</b>
+**WARNING: This is beta software. Backup your music collection first.**
 
-== Requirements
+Requirements
+------------
 
 * Linux, Intel OS X, or Windows
 * Ruby and Rubygems
 * id3lib (Linux and OS X only)
 * some mp3 files
 
-== Installation
+Installation
+------------
 
-<b>Linux/OS X:</b>
+### Linux/OS X:
 
 Install id3lib, Ruby, and Rubygems through your package manager. Then start a terminal and run:
-  sudo gem install sweeper
+    sudo gem install sweeper
 
-<b>Windows:</b>
+### Windows:
 
-If you have Ruby set up via the {One-Click Installer}[http://rubyforge.org/projects/rubyinstaller/], you can install via Rubygems as above.
+If you have Ruby set up via the [One-Click Installer](http://rubyforge.org/projects/rubyinstaller/), you can install via Rubygems as above.
 
-Otherwise, download a zipfile from the appropriate section of the {Rubyforge page}[http://rubyforge.org/frs/?group_id=2835]. Unzip it and copy <tt>sweeper.exe</tt> into the <tt>C:\Windows</tt> folder.
+Otherwise, download a zipfile from the appropriate section of the [Rubyforge page](http://rubyforge.org/frs/?group_id=2835). Unzip it and copy <tt>sweeper.exe</tt> into the <tt>C:\Windows</tt> folder.
 
-== Usage
+Usage
+------
 
 Now, start a terminal. Change to the directory of mp3s you want to tag and run:
-  sweeper --genre --recursive
+    sweeper --genre --recursive
 
 Your mp3s will be updated with missing artist, genre, and trackname information, and a list of all tagged genres will be added to the <tt>comment</tt> field, for use in smart playlists.
 
 You do not need a Last.fm account to use Sweeper.
 
-== Demo
+Demo
+----
 
 Unknown song:
 
-  $ id3info 1_001.mp3
-  *** Tag information for 1_001.mp3
-  *** mp3 info
-  MPEG1/layer III
-  Bitrate: 128KBps
-  Frequency: 44KHz
+    $ id3info 1_001.mp3
+    *** Tag information for 1_001.mp3
+    *** mp3 info
+    MPEG1/layer III
+    Bitrate: 128KBps
+    Frequency: 44KHz
 
 Same song after running <tt>sweeper ----genre</tt>:
 
-  $ id3info 1_001.mp3
-  *** Tag information for 1_001.mp3
-  === TPE1 (Lead performer(s)/Soloist(s)): Photon Band
-  === TIT2 (Title/songname/content description): To Sing For You
-  === WORS (Official internet radio station homepage): http://www.last.fm/music/Ph
-  oton+Band/_/To+Sing+For+You
-  === TCON (Content type): Psychadelic
-  === COMM (Comments): ()[]: rock, psychedelic, mod, Philly
-  *** mp3 info
-  MPEG1/layer III
-  Bitrate: 128KBps
-  Frequency: 44KHz
+    $ id3info 1_001.mp3
+    *** Tag information for 1_001.mp3
+    === TPE1 (Lead performer(s)/Soloist(s)): Photon Band
+    === TIT2 (Title/songname/content description): To Sing For You
+    === WORS (Official internet radio station homepage): http://www.last.fm/music/Ph
+    oton+Band/_/To+Sing+For+You
+    === TCON (Content type): Psychadelic
+    === COMM (Comments): ()[]: rock, psychedelic, mod, Philly
+    *** mp3 info
+    MPEG1/layer III
+    Bitrate: 128KBps
+    Frequency: 44KHz
 
-== Options
+Options
+--------
 
 Sweeper takes a few command line options:
 
@@ -85,16 +83,35 @@ Sweeper takes a few command line options:
     -g, --genre=[force]  Add genre tag and genre comments, optionally overwriting
                          existing ones.
 
-== Notes
+Notes
+-----
 
 You will get cleaner tags if you convert your files to ID3v2 first. Sweeper reads both tag versions, but only outputs ID3v2.
 
-== Reporting problems
+Reporting problems
+------------------
 
-The support forum is here[https://github.com/fauna/sweeper/issues].
+The support forum is [here](https://github.com/fauna/sweeper/issues).
 
 Patches and contributions are very welcome. Please note that contributors are required to assign copyright for their additions to Cloudburst, LLC.
 
-== Further resources
+To Do
+-----
 
+* Album detection via set clustering on http://ws.audioscrobbler.com/1.0/album/ARTIST/ALBUM/info.xml .
+* Handle unicode characters
+
+Further resources
+------------------
+
+* The source for the LasFM Fingerprinter: https://github.com/lastfm/Fingerprinter (if you need to build it from source)
 * http://blog.evanweaver.com/articles/2008/04/13/sweeper/
+
+License
+-------
+
+Copyright 2008 Cloudburst, LLC. Licensed under the AFL 3. See the included LICENSE file. Unlinked portions copyright 2008 Last.fm Ltd., used by permission, and licensed under the GPL 2.
+
+The public certificate for the gem is [here](http://rubyforge.org/frs/download.php/25331/evan_weaver-original-public_cert.pem).
+
+If you use this software, please [make a donation](http://blog.evanweaver.com/donate/), or [recommend Evan](http://www.workingwithrails.com/person/7739-evan-weaver) at Working with Rails.
